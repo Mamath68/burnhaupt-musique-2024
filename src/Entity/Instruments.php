@@ -13,6 +13,10 @@ class Instruments
     #[ORM\Column]
     private ?int $id = null;
 
+        #[ORM\ManyToOne(inversedBy: 'instruments')]
+    private ?Providers $provider = null;
+
+
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
@@ -53,6 +57,18 @@ class Instruments
     public function setType(string $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+     public function getProvider(): ?Providers
+    {
+        return $this->provider;
+    }
+
+    public function setProvider(?Providers $provider): static
+    {
+        $this->provider = $provider;
 
         return $this;
     }

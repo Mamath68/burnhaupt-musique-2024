@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fournisseurs{% endblock %}
+
+{% block body %}
+    <h1>Fournisseurs</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>SocialReason</th>
+                <th>Adresse</th>
+                <th>Zipcode</th>
+                <th>City</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for provider in providers %}
+            <tr>
+                <td>{{ provider.id }}</td>
+                <td>{{ provider.socialReason }}</td>
+                <td>{{ provider.adresse }}</td>
+                <td>{{ provider.zipcode }}</td>
+                <td>{{ provider.city }}</td>
+                <td>
+                    <a href="{{ path('app_providers_show', {'id': provider.id}) }}">show</a>
+                    <a href="{{ path('app_providers_edit', {'id': provider.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_providers_new') }}">Create new</a>
+{% endblock %}

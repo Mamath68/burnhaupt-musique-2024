@@ -1,34 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Instruments{% endblock %}
+		{% block title %}
+			{{ instrument.libelle }}
+		{% endblock %}
 
-{% block body %}
-    <h1>Instruments</h1>
+		{% block body %}
+			<h1>
+				{{ instrument.libelle }}
+			</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ instrument.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ instrument.libelle }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ instrument.type }}</td>
-            </tr>
-            <tr>
-                <th>Img</th>
-                <td>{{ instrument.img }}</td>
-            </tr>
-        </tbody>
-    </table>
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>
+							Id
+						</th>
+						<td>
+							{{ instrument.id }}
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Famille d'instrument
+						</th>
+						<td>{{instrument.familly.libelle}}</td>
+					</tr>
+					<tr>
+						<th>
+							Sous-Famille d'instrument
+						</th>
+						<td>{{instrument.subfamilly.libelle}}</td>
+					</tr>
+					<tr>
+						<th>
+							Type
+						</th>
+						<td>
+							{{ instrument.type }}
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Img
+						</th>
+						<td>
+							{{ instrument.img }}
+						</td>
+					</tr>
+				</tbody>
+			</table>
 
-    <a href="{{ path('app_instruments_index') }}">back to list</a>
+			<a href="{{ path('app_instruments_index') }}">
+				back to list
+			</a>
 
-    <a href="{{ path('app_instruments_edit', {'id': instrument.id}) }}">edit</a>
+			<a href="{{ path('app_instruments_edit', {'id': instrument.id}) }}">
+				edit
+			</a>
 
-    {{ include('instruments/_delete_form.html.twig') }}
-{% endblock %}
+			{{ include('instruments/_delete_form.html.twig') }}
+		{% endblock %}

@@ -13,9 +13,6 @@ class Articles
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    private ?Providers $provider = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $stock = null;
 
@@ -29,19 +26,6 @@ class Articles
     {
         return $this->id;
     }
-
-    public function getProvider(): ?Providers
-    {
-        return $this->provider;
-    }
-
-    public function setProvider(?Providers $provider): static
-    {
-        $this->provider = $provider;
-
-        return $this;
-    }
-
 
     public function getStock(): ?string
     {

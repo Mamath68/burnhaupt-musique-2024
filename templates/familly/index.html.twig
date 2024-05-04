@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Familles d'instruments{% endblock %}
+
+{% block body %}
+    <h1>Les Familles d'instruments</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for familly in famillies %}
+            <tr>
+                <td>{{ familly.id }}</td>
+                <td>{{ familly.libelle }}</td>
+                <td>
+                    <a href="{{ path('app_familly_show', {'id': familly.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

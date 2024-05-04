@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+		{% block title %}
+{{ subfamilly.libelle }}
+
+		{% endblock %}
+
+		{% block body %}
+			<h1>
+				{{ subfamilly.libelle }}
+			</h1>
+
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>
+							Id
+						</th>
+						<td>
+							{{ subfamilly.id }}
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Libelle
+						</th>
+						<td>
+							{{ subfamilly.libelle }}
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Instruments
+						</th>
+						{% for sousfamille in subfamilly.instruments %}
+							<td>
+								<a href={{ path('app_instruments_show', {'id': sousfamille.id} ) }}>
+									{{ sousfamille.libelle }}
+								</a>
+							</td>
+						{% else %}
+							<td>
+								no record found
+							</td>
+						{% endfor %}
+					</tr>
+				</tbody>
+			</table>
+
+			<a href="{{ path('app_subfamilly_index') }}">
+				back to list
+			</a>
+		{% endblock %}

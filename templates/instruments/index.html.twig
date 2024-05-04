@@ -10,9 +10,11 @@
             <tr>
                 <th>Id</th>
                 <th>Libelle</th>
+                <th>Famille d'instruments</th>
+                <th>Sous-famille d'instruments</th>
                 <th>Type</th>
-                <th>Img</th>
-                <th>actions</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -20,11 +22,29 @@
             <tr>
                 <td>{{ instrument.id }}</td>
                 <td>{{ instrument.libelle }}</td>
+                {% if instrument.familly.libelle is defined  %}
+                <td>{{ instrument.familly.libelle }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                {% if instrument.subfamilly.libelle is defined  %}
+                <td>{{ instrument.subfamilly.libelle }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                {% if instrument.type is defined  %}
                 <td>{{ instrument.type }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                {% if instrument.img is defined  %}
                 <td>{{ instrument.img }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
                 <td>
-                    <a href="{{ path('app_instruments_show', {'id': instrument.id}) }}">show</a>
-                    <a href="{{ path('app_instruments_edit', {'id': instrument.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('app_instruments_show', {'id': instrument.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('app_instruments_edit', {'id': instrument.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

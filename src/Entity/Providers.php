@@ -30,8 +30,8 @@ class Providers
     /**
      * @var Collection<int, Articles>
      */
-    #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'provider')]
-    private Collection $articles;
+    #[ORM\OneToMany(targetEntity: Instruments::class, mappedBy: 'provider')]
+    private Collection $instruments;
 
     public function __construct()
     {
@@ -92,29 +92,29 @@ class Providers
     }
 
     /**
-     * @return Collection<int, Articles>
+     * @return Collection<int, Instruments>
      */
-    public function getArticles(): Collection
+    public function getInstruments(): Collection
     {
-        return $this->articles;
+        return $this->instruments;
     }
 
-    public function addArticle(Articles $article): static
+    public function addInstruments(Instruments $instrument): static
     {
-        if (!$this->articles->contains($article)) {
-            $this->articles->add($article);
-            $article->setProvider($this);
+        if (!$this->instruments->contains($instrument)) {
+            $this->instruments->add($instrument);
+            $instrument->setProvider($this);
         }
 
         return $this;
     }
 
-    public function removeArticle(Articles $article): static
+    public function removeArticle(Instruments $instrument): static
     {
-        if ($this->articles->removeElement($article)) {
+        if ($this->instruments->removeElement($instrument)) {
             // set the owning side to null (unless already changed)
-            if ($article->getProvider() === $this) {
-                $article->setProvider(null);
+            if ($instrument->getProvider() === $this) {
+                $instrument->setProvider(null);
             }
         }
 

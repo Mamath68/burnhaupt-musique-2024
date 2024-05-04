@@ -24,16 +24,9 @@ class Familly
     #[ORM\OneToMany(targetEntity: Instruments::class, mappedBy: 'familly')]
     private Collection $instruments;
 
-    /**
-     * @var Collection<int, Articles>
-     */
-    #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'familly')]
-    private Collection $articles;
-
     public function __construct()
     {
         $this->instruments = new ArrayCollection();
-        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,36 +70,6 @@ class Familly
             // set the owning side to null (unless already changed)
             if ($instrument->getFamilly() === $this) {
                 $instrument->setFamilly(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Articles>
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
-
-    public function addArticle(Articles $article): static
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles->add($article);
-            $article->setFamilly($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Articles $article): static
-    {
-        if ($this->articles->removeElement($article)) {
-            // set the owning side to null (unless already changed)
-            if ($article->getFamilly() === $this) {
-                $article->setFamilly(null);
             }
         }
 

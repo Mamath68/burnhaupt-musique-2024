@@ -1,49 +1,104 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}La Boutique{% endblock %}
+		{% block title %}
+			La Boutique
+		{% endblock %}
 
-{% block body %}
-    <h1>La Boutique</h1>
+		{% block body %}
+			<h1>
+				La Boutique
+			</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom de l'article</th>
-                <th>Famille D'instrument</th>
-                <th>Sous-Famille D'instrument</th>
-                <th>Type d'instrument</th>
-                <th></th>
-                <th>Quantité en Stock</th>
-                <th>Prix</th>
-                <th>Fournisseur</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.instruments.libelle }}</td>
-                <td>{{ article.instruments.familly.libelle }}</td>
-                <td>{{ article.instruments.subfamilly.libelle }}</td>
-                <td>{{ article.instruments.type }}</td>
-                <td>{{ article.instruments.img }}</td>
-                <td>{{ article.stock }}</td>
-                <td>{{ article.price }}</td>
-                <td>{{ article.provider.socialReason }}</td>
-                <td>
-                    <a href="{{ path('app_articles_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('app_articles_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							Id
+						</th>
+						<th></th>
+						<th>
+							Nom de l'article
+						</th>
+						<th>
+							Famille D'instrument
+						</th>
+						<th>
+							Sous-Famille D'instrument
+						</th>
+						<th>
+							Type d'instrument
+						</th>
+						<th>
+							Quantité en Stock
+						</th>
+						<th>
+							Prix
+						</th>
+						<th>
+							Fournisseur
+						</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for article in articles %}
+						<tr>
+							<td>
+								{{ article.id }}
+							</td>
+							<td>
+								{{ article.instruments.img }}
+							</td>
+							<td>
+									{{ article.instruments.libelle }}
+							</td>
+							<td>
+								<a href="{{ path('app_familly_show', {'id': article.instruments.familly.id}) }}">
+									{{ article.instruments.familly.libelle }}
+								</a>
+							</td>
+							<td>
+								<a href={{path('app_subfamilly_show', {'id': article.instruments.subfamilly.id} )}}>
+									{{ article.instruments.subfamilly.libelle }}
+								</a>
+							</td>
+							<td>
+								{{ article.instruments.type }}
+							</td>
+							<td>
+								{{ article.stock }}
+							</td>
+							<td>
+								{{ article.price }}
+								€
+							</td>
+							<td>
+								<a href="{{ path('app_providers_show', {'id': article.instruments.provider.id}) }}">
+								{{ article.instruments.provider.socialReason }}
+								</a>
+							</td>
+							<td>
+								<a href="{{ path('app_instruments_show', {'id': article.instruments.id}) }}">
+									Voir l'instrument
+								</a>
+								{% if is_granted('ROLE_ADMIN') %}
+								<a href="{{ path('app_instruments_edit', {'id': article.instruments.id}) }}">
+									edit
+								</a>
+								{% endif %}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4">
+								no records found
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 
-    <a href="{{ path('app_articles_new') }}">Create new</a>
-{% endblock %}
+			<a href="{{ path('app_instruments_new') }}">
+				Create new
+			</a>
+		{% endblock %}
